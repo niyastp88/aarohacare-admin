@@ -1,0 +1,65 @@
+/** Backend API path constants — never hardcode paths in services. */
+export const API_PATHS = {
+  AUTH: {
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RESET_PASSWORD: '/auth/reset-password',
+    CHANGE_PASSWORD: '/auth/change-password',
+    REFRESH: '/auth/refresh',
+    LOGOUT: '/auth/logout',
+    ME: '/auth/me',
+    CSRF: '/auth/csrf',
+  },
+  DOCTORS: {
+    LIST: '/doctors',
+    CREATE: '/doctors',
+    BY_ID: (doctorId: string) => `/doctors/${doctorId}`,
+    SCHEDULES: (doctorId: string) => `/doctors/${doctorId}/schedules`,
+    SCHEDULE: (doctorId: string, date: string) => `/doctors/${doctorId}/schedule/${date}`,
+    CREATE_SCHEDULE: '/doctors/schedule',
+    LIVE_QUEUE: (doctorId: string, date: string) =>
+      `/doctors/${doctorId}/live-queue?date=${date}`,
+    LIVE_OP: (doctorId: string) => `/doctors/${doctorId}/live-op`,
+    LIVE_OVERVIEW: (date: string) => `/doctors/live-overview?date=${date}`,
+    MOVE_OPS: (doctorId: string) => `/doctors/${doctorId}/move-ops`,
+  },
+  APPOINTMENTS: {
+    LIST: '/appointments',
+    LIST_BY_DOCTOR: (doctorId: string) => `/appointments?doctorId=${doctorId}`,
+    PATIENTS: '/appointments/patients',
+    PATIENT_LOOKUP: '/appointments/patients/lookup',
+    PATIENT_DETAIL: (patientId: string) => `/appointments/patients/${patientId}`,
+    OFFLINE: '/appointments/offline',
+    UPDATE_STATUS: (id: string) => `/appointments/${id}/status`,
+    MARK_ARRIVED: (id: string) => `/appointments/${id}/arrived`,
+    UNMARK_ARRIVED: (id: string) => `/appointments/${id}/unmark-arrived`,
+    MARK_REFUNDED: (id: string) => `/appointments/${id}/refund`,
+  },
+  UPLOADS: {
+    IMAGE: '/uploads',
+    PROXY: '/uploads/proxy',
+  },
+  FACILITIES: {
+    MINE: '/facilities/mine',
+  },
+  EMERGENCY: {
+    MINE: '/emergency',
+    CREATE: '/emergency',
+    REPLY: (id: string) => `/emergency/${id}/reply`,
+  },
+  NOTIFICATIONS: {
+    LIST: '/notifications',
+    READ_ALL: '/notifications/read-all',
+    READ: (id: string) => `/notifications/${id}/read`,
+  },
+  LAB_REPORTS: {
+    LIST: '/lab-reports',
+    STATS: '/lab-reports/stats',
+    PATIENTS: '/lab-reports/patients',
+    LOOKUP_PATIENT: '/lab-reports/patients/lookup',
+    PATIENT: (patientId: string) => `/lab-reports/patients/${patientId}`,
+    CREATE: '/lab-reports',
+    DELETE: (id: string) => `/lab-reports/${id}`,
+  },
+} as const;
